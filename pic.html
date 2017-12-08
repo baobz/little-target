@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta charset="utf-8">
+    <title>测试页面</title>
+    <link rel="stylesheet" href="http://web.rrzuzu.com/WebStatic/rry-activity/target/css/index.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+<body class="pic">
+  <img id="imgUrl" src="">
+  <script>
+    $(function() {
+      var imgUrl = window.location.hash;
+      $("#imgUrl").attr("src", imgUrl.substring(1));
+      setTimeout(function(){
+        var imgHeight = $("#imgUrl").height();
+        var bHeight = $("body").height() - 5;
+        if (imgHeight < bHeight) {
+          $("#imgUrl").css("height", "100%");
+        }
+      }, 100);
+      
+    })
+  </script>
+</body>
+</html>

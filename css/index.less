@@ -1,0 +1,229 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+*:after, *:before {
+  box-sizing: border-box;
+}
+input{
+  outline: none;
+}
+[hidden], .hide {
+  display: none !important;
+}
+.show {
+  display: block !important;
+}
+[disabled], .disabled {
+  cursor: not-allowed;
+}
+
+.clearfix {
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+img {
+  border-style: none;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: sans-serif;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+
+button,
+input {
+  overflow: visible;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+button,
+html [type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+textarea {
+  overflow: auto;
+}
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+[type="search"] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
+}
+
+[type="search"]::-webkit-search-cancel-button,
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+	font-family: 'Helvetica Neue', Helvetica, sans-serif;
+	font-size: 16px;
+  color: #555;
+	-webkit-overflow-scrolling: touch;
+}
+
+a {
+  color: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  text-decoration: none;
+}
+li {
+  list-style-type: none;
+}
+button, input, optgroup, select, textarea {
+  outline: none;
+}
+// ======================================================
+/** fullscreen style **/
+:-webkit-full-screen,
+:-moz-full-screen,
+:fullscreen {
+  width: 100%;
+  height: 100%;
+}
+// ======================================================
+/** placeholder style **/
+input::-moz-placeholder,
+textarea::-moz-placeholder,
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder,
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: #999;
+}
+img {
+  vertical-align: middle;
+}
+/* little-target.html start */
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-size: cover;
+}
+.container {
+  height: 100%;
+  background: url("../images/bj.jpg") no-repeat center;
+}
+header {
+  img {
+    width: 100%;
+  }
+}
+.title {
+  width: 85%;
+  margin: 0 auto;
+  img {
+    width: 100%;
+  }
+}
+.main {
+  width: 70%;
+  margin: 0 auto;
+  font-size: 1rem;
+  color: #5B4C4D;
+  font-weight: 400;
+  .my-target {
+    display: block;
+  }
+  .name {
+    margin: 0.8rem 0;
+  }
+  .target {
+    label {
+      margin-bottom: .4rem;
+    }
+  }
+  input {
+    width: 45%;
+  }
+  textarea {
+    width: 100%;
+    height: 4rem;
+    resize: none;
+  }
+  textarea, input {
+    padding: 3px;
+    background-color: transparent;
+    border: 2px dashed #958787;
+    border-radius: 8px;
+  }
+  button {
+    width: 8rem;
+    height: 2.5rem;
+    background: url('../images/btn.png') no-repeat center;
+    background-size: contain;
+    border: none;
+  }
+  .btn-target {
+    text-align: center;
+    margin-top: .8rem
+  }
+}
+/* little-target.html end */
+/*pic.html start*/
+body.pic {
+  overflow-y: auto;
+  height: auto; 
+  min-height: 100%;
+  img {
+    width: 100%;
+  }
+}
+/*pic.html end*/
