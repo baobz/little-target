@@ -7,7 +7,6 @@
     <script src="http://web.rrzuzu.com/WebStatic/rry-activity/test1/js/rem-init.js"></script>
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="http://web.rrzuzu.com/WebStatic/rry-activity/target/js/html2canvas.js"></script>
-    <!-- <script src="js/prettify.js"></script> -->
     <!-- <link rel="stylesheet" href="http://web.rrzuzu.com/WebStatic/rry-activity/test1/dist/layer/need/layer.css"> -->
     <link rel="stylesheet" href="http://web.rrzuzu.com/WebStatic/rry-activity/target/css/index.css">
     <!-- <script src="http://web.rrzuzu.com/WebStatic/rry-activity/test1/dist/layer/layer.js"></script> -->
@@ -46,7 +45,7 @@
       <style>
         #target {
           position: absolute;
-          top: 0px;
+          top: 999px;
           z-index: -1;
           background: url('http://wx.pingpingapp.com/static/images/bj.jpg') no-repeat;
           background-size: 100% 100%;
@@ -122,9 +121,12 @@
       $(function() {
         setTimeout(function() {
           $('#target').css("display","block");
-        }, 1000)
+        }, 1000);
 
-        // window.prettyPrint();
+        $('.container')[0].addEventListener('touchmove', e => {
+          e.preventDefault()
+        }, false)
+
         $(".submitBtn").on("click", function (event) {
           $('.user-name').text($('#name').val());
           $('.user-target').text($('#note').val());
@@ -133,7 +135,7 @@
           var imgBlob = "";
           event.preventDefault();
           html2canvas(document.getElementById("target"), {
-            allowTaint: true,
+            allowTaint: false,
             taintTest: true,
             logging: true,
             useCORS: true,
@@ -166,7 +168,6 @@
                       },
                       success: function (data) {
                         if (data.code == 12000) {
-                          debugger;
                           window.location.href = "http://wx.pingpingapp.com/activitymanage/pic#" + imgUrl;
                         }
                       }

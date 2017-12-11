@@ -18,9 +18,10 @@
         var bHeight = $("body").height() - 5;
         if (imgHeight < bHeight) {
           $("#imgUrl").css("height", "100%");
+        } else {
+          $("#imgUrl").css("height", bHeight+"px");
         }
       }, 100);
-      
     })
   </script>
 </body>

@@ -145,15 +145,15 @@ img {
   vertical-align: middle;
 }
 /* little-target.html start */
-body {
+body.index {
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  background-size: cover;
 }
 .container {
   height: 100%;
+  position: fixed;
   background: url("http://web.rrzuzu.com/WebStatic/rry-activity/target/images/bj.jpg") no-repeat center;
+  background-size: cover;
 }
 header img {
   width: 100%;
