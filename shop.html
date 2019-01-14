@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta charset="utf-8">
+  <title>珍·相</title>
+  <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css">
+  <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.0/css/jquery-weui.min.css">
+  <link rel="stylesheet" href="http://web.rrzuzu.com/WebStatic/rry-activity/test1/dist/layer/need/layer.css">
+  <link rel="stylesheet" href="css/index.less">
+  <!-- <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>     -->
+</head>
+
+<body>
+  <div class="container st-register">
+    <header>
+      <img src="/images/logo.png" alt="">
+    </header>
+    <div class="main st-order">
+      <form class="form" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" id="new_id" value="">
+        <input type="hidden" name="activity_id" id="activity_id" value="46">
+        <div class="user">
+          <label>演出时间</label>
+          <div class="input-container st-order">
+            <span class="">2018-05-26 周六 19:30</span>
+          </div>
+        </div>
+        <div class="phone">
+          <label>演出地点</label>
+          <div class="input-container st-order">
+            <span class="">上海梅赛德斯奔驰文化中心</span>
+          </div>
+        </div>
+
+        <div class="code-item st-order">
+          <label>选择价格</label>
+          <div class="input-container half-container st-order">
+            <span class="col-half chose active">看台<b>380</b><input type="hidden" value="380">元</span>
+            <span class="col-half chose">看台<b>480</b><input type="hidden" value="480" disabled>元</span>
+          </div>
+          <div class="input-container half-container st-order">
+            <span class="col-half chose">看台<b>680</b><input type="hidden" value="680" disabled>元</span>
+            <span class="col-half chose">看台<b>980</b><input type="hidden" value="980" disabled>元</span>
+          </div>
+          <div class="input-container half-container st-order">
+            <span class="col-half chose">内场<b>980</b><input type="hidden" value="980" disabled>元</span>
+            <span class="col-half chose">内场<b>1380</b><input type="hidden" value="1380" disabled>元</span>
+          </div>
+        </div>
+
+        <div class="addr">
+          <label>购买数量</label>
+          <div class="input-container half-container st-order">
+            <span class="col-half">
+              <i class="icon icon-minus"></i>
+              <input class="add-num" type="text" value="1" name="">
+              <i class="icon icon-plus"></i>
+            </span>
+          </div>
+          <div class="input-container half-container st-order">
+            <span class="col-half total">¥<b>380</b></span>
+          </div>
+        </div>
+        
+        <div class="btn-group st-order clearfix">
+          <button type="button" class="btn btn-colorless">确认购买</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="http://web.rrzuzu.com/WebStatic/rry-activity/test1/js/rem-init.js"></script>
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/jquery-weui.min.js"></script>
+  <script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/city-picker.min.js"></script>
+  <script src="http://web.rrzuzu.com/WebStatic/rry-activity/test1/dist/layer/layer.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="https://cdn.bootcss.com/jquery.form/4.2.2/jquery.form.min.js"></script>
+  <script>
+    function tips(cont) {
+      layer.open({
+        style: 'border:none; background-color:rgba(0,0,0,0.8); color:#fff;padding:10px; width:60%;',
+        content: cont,
+        time: 2,
+        shade: false
+      });
+    }
+
+    $(function() {
+      $('.chose').click(function(){
+        $(this).toggleClass('active');
+        if($('.active').length < 1) {
+          tips('价格不能为空');
+          $(this).addClass('active');
+          return false;
+        }
+        $('.chose').find('input').prop('disabled', true);
+        $('.active').find('input').prop('disabled', false);
+
+        var priceArr = $('.active');
+        var num = $('.add-num').val();
+        $('.total').children('b').text(total(priceArr, num));
+      
+      })
+
+      $('.icon-plus').click(function(){
+        var val = $(this).prev('input').val();
+        $(this).prev('input').val(++val);
+        var priceArr = $('.active');
+        $('.total').children('b').text(total(priceArr, val));
+      })
+
+      $('.icon-minus').click(function () {
+        var val = $(this).next('input').val();
+        if(val > 1) {
+          $(this).next('input').val(--val);
+          var priceArr = $('.active');
+          $('.total').children('b').text(total(priceArr, val));
+        }
+      })
+
+      $('.add-num').bind("input propertychange", function(){
+        var value = $(this).val();
+        var num = 1;
+        if(!/^[1-9]\d*$/g.test() && value != '') {
+          num = value.match(/[1-9]\d*/g)[0]
+          $(this).val(num);
+        }
+        var priceArr = $('.active');
+        $('.total').children('b').text(total(priceArr, num));  
+      })
+
+      $('.btn-colorless').click(function () {
+        var val = $('.add-num').val();
+        if(val === '') {
+          tips('数量不能为空');
+          return false;
+        }
+        LM.info.show();
+      })
+      
+      $("body").on('click','#city-picker',function () {
+        $('input').blur();
+        $(this).cityPicker({});
+        $('.shade').css('z-index', '999')
+      })
+      
+      $('#phone').on("input propertychange", function(){
+        $(this).val().length < 11
+      })
+    })
+
+    function total(arr, num) {
+      var sum = [];
+      var total;
+      
+      if(arr.length > 0) {
+        $.map(arr, function (item) {
+          sum.push(+$(item).children('b').text() * num);
+        });
+
+        total = sum.reduce(function (pre, current) {
+          return pre + current;
+        })
+
+        return total;
+      } else {
+        tips('请选择票价');
+      }
+    }
+  </script>
+</body>
+
+</html>

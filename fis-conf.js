@@ -2,7 +2,7 @@ fis.set('domain_test', ''); //开发环境静态资源
 // 预发布环境
 fis.set('domain_pre', 'http://preuc.fdc.com.cn');
 // 线上环境
-fis.set('domain_build', 'http://web.rrzuzu.com/WebStatic/rry-activity/target');
+fis.set('domain_build', 'http://web.rrzuzu.com/WebStatic/rry-activity/zhenxiang');
 
 
 // 定义不同域的url

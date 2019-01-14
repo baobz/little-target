@@ -1,3 +1,5 @@
+/** style reset start **/
+
 * {
   margin: 0;
   padding: 0;
@@ -28,6 +30,12 @@ input{
     display: table;
     clear: both;
   }
+}
+.pull-left {
+  float: left;
+}
+.pull-right {
+  float: right;
 }
 img {
   border-style: none;
@@ -150,80 +158,254 @@ textarea::-webkit-input-placeholder {
 img {
   vertical-align: middle;
 }
-/* little-target.html start */
-body.index {
-  width: 100%;
-  height: 100%;
+/** style reset end **/
+
+/** page common start **/
+@base-color: #A01F24;
+
+body {
+  background: url('/images/background.jpg') no-repeat;
+  background-position: center top;
+  background-size: cover;
 }
 .container {
   height: 100%;
-  position: fixed;
-  background: url("../images/bj.jpg") no-repeat center;
-  background-size: cover;
-}
-header {
+  header {
+    padding: 0.5rem 2rem;
+  }
   img {
     width: 100%;
   }
+  input::-webkit-input-placeholder{
+    color:#fff;
+  }
+  input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+    color:#fff;
+  }
+  input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+    color:#fff;
+  }
+  input:-ms-input-placeholder{  /* Internet Explorer 10-11 */ 
+    color:#fff;
+  }
 }
-.title {
-  width: 85%;
-  margin: 0 auto;
-  img {
+b {
+  font-weight: normal;
+}
+.btn {
+  border: none;
+  background: transparent;
+}
+/** page common end **/
+
+/** page start start **/
+/****** register start ******/
+#city-picker {
+  width:75%;
+}
+.st-register {
+  form>div {
+    margin-bottom: 0.4rem;
+  }
+  .main {
+    position: absolute;
     width: 100%;
-  }
-}
-.main {
-  width: 70%;
-  margin: 0 auto;
-  font-size: 1rem;
-  color: #5B4C4D;
-  font-weight: 400;
-  .my-target {
-    display: block;
-  }
-  .name {
-    margin: 0.8rem 0;
-  }
-  .target {
-    label {
-      margin-bottom: .4rem;
+    top: 13rem;
+    &.st-order {
+      top: 12rem;
     }
   }
-  input {
-    width: 45%;
-  }
-  textarea {
-    width: 100%;
-    height: 4rem;
-    resize: none;
-  }
-  textarea, input {
-    padding: 3px;
-    background-color: transparent;
-    border: 2px dashed #958787;
-    border-radius: 8px;
-  }
-  button {
-    width: 8rem;
-    height: 2.5rem;
-    background: url('../images/btn.png') no-repeat center;
-    background-size: contain;
-    border: none;
-  }
-  .btn-target {
+  label {
+    display: inline-block;
+    width: 32%;
+    margin-left: 1%;
+    padding: .6rem 0 0.5rem;
+    color: #A01F24;
+    font-size: .7rem;
+    font-weight: bold;
     text-align: center;
-    margin-top: .8rem
+    background: url('/images/title.png') no-repeat;
+    background-position: center .25rem;
+    background-size: contain;
+    
   }
-}
-/* little-target.html end */
-/*pic.html start*/
-body.pic {
-  overflow-y: auto;
-  height: auto; 
-  min-height: 100%;
-  img {
+  .input-container {
+    float: right;
+    width: 67%;
+  }
+  span {
+    float: left;
+    width: 70%;
+    height: 2.1rem;
+    background: url('/images/kuang.png') no-repeat;
+    background-position: left 2px;
+    background-size: 100% 100%;
+    position: relative;
+    input {
+      width: 65%;
+      height: 100%;
+      font-size: 0.7rem;
+      color: #fff;
+      background: transparent;
+      border: none;
+      margin-left: .85rem;
+    }
+    &.select-container {
+      padding-right: 1.5rem;
+      background-image: url('/images/arrow_down.png');
+      select {
+      width: 100%;
+      height: 100%;
+      appearance:none;
+      -moz-appearance:none;
+      -webkit-appearance:none;
+      padding-left: 0.8rem;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 0.6rem;
+    }
+    }
+    
+  }
+  .icon {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.3rem;
+    width: 1.3rem;
+    height: 1.3rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+  .icon-user {
+    background-image: url('/images/icon_user.png');
+  }
+  .icon-phone {
+    background-image: url('/images/icon_phone.png');
+  }
+  .icon-code {
+    background-image: url('/images/icon_code.png');
+  }
+  .icon-addr {
+    background-image: url('/images/icon_addr.png');
+  }
+  .icon-plus {
+    width: 1rem;
+    height: 1rem;
+    top: 0.5rem;
+    right: 0.4rem;
+    background-image: url('/images/plus.png');
+  }
+  .icon-minus {
+    width: 1rem;
+    height: 1rem;
+    top: 0.5rem;
+    left: 0.4rem;
+    background-image: url('/images/minus.png');
+  }
+  .icon-arrow {
+    background-image: url('/images/icon_arrow.png');
+  }
+  .send {
+    background:url('/images/code.png') no-repeat center center;
+    background-size: 100% 75%;
+    width: 25%;
+    color: @base-color;
+    font-size: 0.5rem;
+    float: right;
+    padding: 0.3rem 0 0 0.4rem;
+  }
+  .long-inp {
     width: 100%;
+    i {
+      margin-right: 2px;
+    }
+  }
+  .main {
+    padding: 0 1.2rem;
+  }
+  .btn-group {
+    text-align: center;
+    .btn {
+      width: 47%;
+      text-align: center;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1rem;
+      padding: 1.2rem 1rem;
+      background-position: center center;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    .btn-colorless {
+      margin-right: 3%;
+      color: @base-color;
+      background-image: url('/images/btn_colorless.png')
+    }
+    .btn-colored {
+      background-image: url('/images/btn_colored.png')
+    }
+  }
+  .col-half {
+    width: 47%;
+    &:first-child {
+      margin-right: 4%;
+      margin-left: 2%;
+    }
   }
 }
-/*pic.html end*/
+/****** register end ******/
+
+
+/****** order start ******/
+.input-container.st-order {
+  span {
+    font-size: 0.7rem;
+    line-height: 2.1rem;
+    color: #fff;
+    width: 95%;
+    padding-left: 1rem;
+    background-image: url('/images/long.png');
+    background-position: left 0px;
+    &.col-half {
+      padding: 0;
+      text-align: center;
+      width: 45%;
+      background-image: url('/images/no_select.png');
+      &.active {
+        background-image: url('/images/select.png');
+      }
+    }
+  }
+  &.half-container {
+    padding-left: 0.5rem;
+    .total {
+      background-image: none;
+      font-size: 1.5rem;
+      margin-top: 0.1rem;
+    }
+  }
+  input.add-num {
+    width: 1.75rem;
+    height: auto;
+    font-size: 0.8rem;
+    font-size: 1rem;
+    margin-left: 0;
+    text-align: center;
+  }
+}
+
+.code-item.st-order {
+  height: 6rem;
+}
+.btn-group {
+  &.st-order {
+    text-align: center;
+    .btn-colorless {
+      padding: 0.5rem;
+    }
+  }
+}
+/****** order end ******/
+/** page start end **/

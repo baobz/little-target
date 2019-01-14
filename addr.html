@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta charset="utf-8">
+    <title>珍·相</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.0/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="http://web.rrzuzu.com/WebStatic/rry-activity/test1/dist/layer/need/layer.css">
+    <link rel="stylesheet" href="css/index.less">
+  </head>
+  <body>
+    <div class="container st-register">
+      <header>
+        <img src="/images/logo.png" alt="">
+      </header>
+      <div class="main">
+        <form class="form" method="post" enctype="multipart/form-data">
+          <div class="user">
+            <label>收 货 人</label>
+            <div class="input-container">
+              <span>
+                <input type="text" class="name-inp" placeholder="点击输入姓名" name="">
+                <i class="icon icon-user"></i>
+              </span>
+            </div>
+          </div>
+          <div class="phone">
+            <label>手机号码</label>
+            <div class="input-container">
+              <span>
+                <input type="number" class="phone-inp" value="" placeholder="点击输入手机号" name="">
+                <i class="icon icon-phone"></i>
+              </span>
+              <span class="code send">发送<br/>验证码</span>
+            </div>
+          </div>
+
+          <div class="code-item">
+            <label>验 证 码</label>
+            <div class="input-container">
+              <span>
+                <input type="text" class="code-inp" placeholder="点击输入验证码" name="">
+                <i class="icon icon-code"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="addr">
+            <label>选择地区</label>
+            <div class="input-container">
+              <span class="long-inp">
+                <input id="city-picker" type="text" readonly placeholder="请选择省市区" name="">
+                <i class="icon icon-arrow"></i>
+              </span>
+            </div>
+          </div>
+          <div class="detail-addr">
+            <label>详细地址</label>
+            <div class="input-container">
+              <span class="long-inp">
+                <input type="text" placeholder="点击输入详细地址" name="">
+                <i class="icon icon-addr"></i>
+              </span>
+            </div>
+          </div>
+          <div class="btn-group clearfix">
+            <button type="button" class="btn btn-colorless">再次购买</button>
+            <button type="button" class="btn btn-colored">确认提交</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    <script src="http://web.rrzuzu.com/WebStatic/rry-activity/test1/js/rem-init.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/jquery-weui.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/city-picker.min.js"></script>
+    <script src="http://web.rrzuzu.com/WebStatic/rry-activity/test1/dist/layer/layer.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="https://cdn.bootcss.com/jquery.form/4.2.2/jquery.form.min.js"></script>
+    <!-- <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>     -->
+    <script>
+      LM.alert.Over();
+
+      function tips(cont) {
+        layer.open({
+          style: 'border:none; background-color:rgba(0,0,0,0.8); color:#fff;padding:10px; width: 60%;',
+          content: cont,
+          time: 2,
+          shade: false
+        });
+      }
+      
+      var count = 60;
+      function countDown(){
+        count--;
+        if(count>=0){
+          setTimeout(countDown,1000);
+          $('.send').html(count+'s<br/>后重发').removeClass('code');
+        } else {
+          $('.send').html('发送<br/>验证码').addClass('code');
+        }
+      }
+
+      $(function () {
+        var oldPhone = $('.phone-inp').val();
+        var newPhone = $('.phone-inp').val();
+        if(oldPhone) {
+          $('.send').hide();
+          $('.code-item').hide();
+        }
+        $('.phone-inp').bind("input propertychange", function () {
+          newPhone = $(this).val();
+          if(oldPhone !== newPhone) {
+            $('.send').show();
+            $('.code-item').show();
+          } else {
+            $('.send').hide();
+            $('.code-item').hide();
+          }
+        });
+
+        $('.input-container').on('click','.code',function() {
+          var phone = $.trim($('.phone-inp').val());
+          if (!isMobile(phone)) {
+            tips('请输入正确的手机号码');
+            return false;
+          }
+          LM.code.show();
+        })
+
+        $('.btn-colored').click(function () {
+          $('.form').ajaxSubmit({
+            async: true,
+            dataType: "json",
+            // url: base + "activitymanage/saveOrUpdateForCodeAndUser",
+            beforeSubmit: function (a, f, o) {
+              var name = $.trim($('.name-inp').val());
+              var phone = $.trim($('.phone-inp').val());
+              var code = $.trim($('.code-inp').val());
+              debugger;
+              if (!isName(name)) {
+                tips('请输入正确的姓名');
+                return false;
+              } else if (!isMobile(phone)) {
+                tips('请输入正确的手机号码');
+                return false;
+              } else if (code == '' && (!(newPhone===oldPhone))) {
+                tips('请输入正确的验证码');
+                return false;
+              }
+            },
+            success: function (resp) {
+              if (resp.code == 12000) {
+                tips('信息提交成功，我们将在3个工作日内给您邮寄！');
+                window.location.href = 'http://wx.pingpingapp.com/activitymanage/32';
+              } else {
+                tips(resp.msg);
+                return false;
+              }
+            },
+            error: function () {
+              tips('出错了');
+              return false;
+            }
+          })
+        })
+        
+        $("#city-picker").cityPicker({});
+        $("#city-picker").click(function(){
+          $('input').blur();
+          $(this).cityPicker({});
+        })
+      })
+    </script>
+  </body>
+</html>
